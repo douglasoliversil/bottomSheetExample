@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PernambucanasCartCounter</string>
+    <string name="products_bag">Sacola de produtos</string>
+    <string name="count_sample_number">0</string>
+    <string name="item_sample_cost">R$ 100,00</string>
+    <string name="item_sample_description">Samgung Evo 128gb</string>
+</resources>

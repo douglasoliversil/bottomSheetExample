@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/itemDescription"
+        android:layout_width="@dimen/noDimen"
+        android:layout_height="wrap_content"
+        android:text="@string/item_sample_description"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/deleteItem"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/deleteItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_garbage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/itemPrice"
+        android:layout_width="@dimen/noDimen"
+        android:layout_height="wrap_content"
+        android:text="@string/item_sample_cost"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/quantitySelector"
+        app:layout_constraintEnd_toStartOf="@id/quantitySelector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/quantitySelector" />
+
+    <include
+        android:id="@+id/quantitySelector"
+        layout="@layout/layout_item_quantity_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deleteItem" />
+
+    <View
+        android:layout_width="@dimen/noDimen"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="@id/quantitySelector"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/itemDescription"
+        app:layout_constraintTop_toBottomOf="@id/quantitySelector" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
