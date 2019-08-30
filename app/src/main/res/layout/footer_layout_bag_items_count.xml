@@ -21,20 +21,6 @@
         app:layout_constraintTop_toTopOf="@id/countText" />
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="@dimen/noDimen"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="@string/products_bag"
-        android:textColor="#354dc4"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/countText"
-        app:layout_constraintEnd_toStartOf="@id/dropDownUp"
-        app:layout_constraintStart_toEndOf="@id/countText"
-        app:layout_constraintTop_toTopOf="@id/countText" />
-
-    <TextView
         android:id="@+id/countText"
         android:layout_width="@dimen/bag_footer_count_container_size"
         android:layout_height="@dimen/bag_footer_count_container_size"
@@ -47,6 +33,31 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="@dimen/noDimen"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/products_bag"
+        android:textColor="#354dc4"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/countText"
+        app:layout_constraintStart_toEndOf="@id/countText"
+        app:layout_constraintTop_toTopOf="@id/countText" />
+
+    <TextView
+        android:id="@+id/removeAll"
+        android:layout_width="@dimen/noDimen"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="Limpar tudo"
+        android:textColor="@android:color/holo_blue_light"
+        app:layout_constraintBottom_toBottomOf="@id/countText"
+        app:layout_constraintEnd_toStartOf="@id/dropDownUp"
+        app:layout_constraintStart_toEndOf="@id/title"
+        app:layout_constraintTop_toTopOf="@id/countText" />
 
     <View
         android:id="@+id/headerDivider"

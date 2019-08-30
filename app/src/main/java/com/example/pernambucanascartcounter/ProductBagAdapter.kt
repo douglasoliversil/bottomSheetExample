@@ -13,13 +13,16 @@ import java.text.NumberFormat
 
 class ProductBagAdapter(
     private val items: MutableList<BagItem>,
-    private val dataHasChanged: () -> Unit
+    private val dataHasChangedCallback: () -> Unit
 ) : RecyclerView.Adapter<ProductBagAdapter.ProductBagViewHolder>() {
+
+    private var countTotalPrice = ZERO_PRICE
 
     override fun onBindViewHolder(holder: ProductBagViewHolder, position: Int) {
         with(items[position]) {
             holder.view.itemDescription.text = this.description
-            holder.view.itemPrice.text = NumberFormat.getCurrencyInstance().format(this.price.toDouble())
+            holder.view.itemPrice.text =
+                NumberFormat.getCurrencyInstance().format(this.price.toDouble())
             holder.view.itemCount.setText(this.quantity.toString())
             holder.view.itemCount.addTextChangedListener(object : TextWatcher {
 
@@ -45,14 +48,16 @@ class ProductBagAdapter(
             holder.view.addItem.setOnClickListener {
                 this.quantity++
                 holder.view.itemCount.setText(this.quantity.toString())
+                updateDataSet(dataHasChangedCallback)
             }
             holder.view.removeItem.setOnClickListener {
                 if (this.quantity > 1) this.quantity--
                 holder.view.itemCount.setText(this.quantity.toString())
+                updateDataSet(dataHasChangedCallback)
             }
             holder.view.deleteItem.setOnClickListener {
                 items.removeAt(position)
-                updateDataSet(dataHasChanged)
+                updateDataSet(dataHasChangedCallback)
             }
         }
 
@@ -75,9 +80,9 @@ class ProductBagAdapter(
     }
 
     fun getTotalPrice(): Double {
-        var countTotalPrice = 0.0
+        countTotalPrice = ZERO_PRICE
         items.forEach {
-            countTotalPrice += it.price.toDouble()
+            countTotalPrice += it.price.toDouble() * it.quantity
         }
         return countTotalPrice
     }
@@ -86,6 +91,7 @@ class ProductBagAdapter(
 
     companion object {
         private const val ZERO = "0"
+        private const val ZERO_PRICE = 0.0
         private const val ONE = "1"
 
     }

@@ -27,6 +27,35 @@ class MainActivity : AppCompatActivity() {
 
         btnSheet = from(bagFooterCounter)
 
+        mAdapater = ProductBagAdapter(items) { updateTotals() }
+
+        updateTotals()
+
+        with(productList) {
+            layoutManager =
+                LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+            adapter = mAdapater
+        }
+
+        setupListeners()
+    }
+
+    private fun updateTotals() {
+        countText.text = mAdapater.itemCount.toString()
+        summaryCost.text = NumberFormat.getCurrencyInstance().format(mAdapater.getTotalPrice())
+    }
+
+    private fun setupListeners() {
+        addProduct.setOnClickListener {
+            items.add(BagItem("Teste de inserção", "50.00"))
+            mAdapater.updateDataSet { updateTotals() }
+        }
+        dropDownUp.setOnCheckedChangeListener { _, selected ->
+            if (selected)
+                btnSheet.setState(STATE_EXPANDED)
+            else
+                btnSheet.setState(STATE_COLLAPSED)
+        }
         btnSheet.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 
             override fun onSlide(p0: View, p1: Float) {}
@@ -39,34 +68,10 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
-        dropDownUp.setOnCheckedChangeListener { _, selected ->
-            if (selected)
-                btnSheet.setState(STATE_EXPANDED)
-            else
-                btnSheet.setState(STATE_COLLAPSED)
-        }
-
-
-        mAdapater = ProductBagAdapter(items) { updateTotals() }
-
-        updateTotals()
-
-        with(productList) {
-            layoutManager =
-                LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-            adapter = mAdapater
-        }
-        addProduct.setOnClickListener {
-            items.add(BagItem("Teste de inserção", "50.00"))
+        removeAll.setOnClickListener {
+            items.clear()
             mAdapater.updateDataSet { updateTotals() }
         }
-
-    }
-
-    private fun updateTotals() {
-        countText.text = mAdapater.itemCount.toString()
-        summaryCost.text = NumberFormat.getCurrencyInstance().format(mAdapater.getTotalPrice())
     }
 
     private fun mockList(): MutableList<BagItem> {
